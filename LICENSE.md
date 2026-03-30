@@ -42,6 +42,8 @@ The terms of licensing this package are as follow (modified BSD):
 
 ## Terms
 
+Copyright © 2026, devnegative-asm
+
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
