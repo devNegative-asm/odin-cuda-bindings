@@ -599,7 +599,6 @@ when (ODIN_OS == .Windows) {
 } else {
     foreign import lib "system:libnppicc.so"
 }
-
 @(default_calling_convention = "stdcall" when (ODIN_OS == .Windows) else "c")
 foreign lib {
     nppiRGBToYUV_8u_C3R_Ctx                      :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
@@ -662,12 +661,12 @@ foreign lib {
     nppiRGBToYUV422_8u_C3P3R                     :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYUV422ToRGB_8u_C2C3R_Ctx                 :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiYUV422ToRGB_8u_C2C3R                     :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
-    nppiYUV422ToRGB_8u_P3R_Ctx                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^[3]cuda.CUdeviceptr, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYUV422ToRGB_8u_P3R                       :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^[3]cuda.CUdeviceptr, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
-    nppiYUV422ToRGB_8u_P3C3R_Ctx                 :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYUV422ToRGB_8u_P3C3R                     :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
-    nppiYUV422ToRGB_8u_P3AC4R_Ctx                :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYUV422ToRGB_8u_P3AC4R                    :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
+    nppiYUV422ToRGB_8u_P3R_Ctx                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^[3]cuda.CUdeviceptr, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYUV422ToRGB_8u_P3R                       :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^[3]cuda.CUdeviceptr, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
+    nppiYUV422ToRGB_8u_P3C3R_Ctx                 :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYUV422ToRGB_8u_P3C3R                     :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
+    nppiYUV422ToRGB_8u_P3AC4R_Ctx                :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYUV422ToRGB_8u_P3AC4R                    :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYUV422ToRGBBatch_8u_P3C3R_Ctx            :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiYUV422ToRGBBatch_8u_P3C3R                :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYUV422ToRGBBatch_8u_P3C3R_Advanced_Ctx   :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oMaxSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
@@ -680,14 +679,14 @@ foreign lib {
     nppiRGBToYUV420_8u_P3R                       :: proc(pSrc: ^[3]cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiRGBToYUV420_8u_C3P3R_Ctx                 :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiRGBToYUV420_8u_C3P3R                     :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize) -> NppStatus ---
-    nppiYUV420ToRGB_8u_P3R_Ctx                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^[3]cuda.CUdeviceptr, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYUV420ToRGB_8u_P3R                       :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^[3]cuda.CUdeviceptr, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
-    nppiYUV420ToRGB_8u_P3C3R_Ctx                 :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYUV420ToRGB_8u_P3C3R                     :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
-    nppiYUV420ToRGB_8u_P3C4R_Ctx                 :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYUV420ToRGB_8u_P3C4R                     :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
-    nppiYUV420ToRGB_8u_P3AC4R_Ctx                :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYUV420ToRGB_8u_P3AC4R                    :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
+    nppiYUV420ToRGB_8u_P3R_Ctx                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^[3]cuda.CUdeviceptr, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYUV420ToRGB_8u_P3R                       :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^[3]cuda.CUdeviceptr, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
+    nppiYUV420ToRGB_8u_P3C3R_Ctx                 :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYUV420ToRGB_8u_P3C3R                     :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
+    nppiYUV420ToRGB_8u_P3C4R_Ctx                 :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYUV420ToRGB_8u_P3C4R                     :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
+    nppiYUV420ToRGB_8u_P3AC4R_Ctx                :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYUV420ToRGB_8u_P3AC4R                    :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYUV420ToRGBBatch_8u_P3C3R_Ctx            :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiYUV420ToRGBBatch_8u_P3C3R                :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYUV420ToRGBBatch_8u_P3C3R_Advanced_Ctx   :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oMaxSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
@@ -702,10 +701,10 @@ foreign lib {
     nppiNV21ToRGB_8u_P2C4R                       :: proc(pSrc: ^[2]cuda.CUdeviceptr, rSrcStep: c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiBGRToYUV420_8u_AC4P3R_Ctx                :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiBGRToYUV420_8u_AC4P3R                    :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize) -> NppStatus ---
-    nppiYUV420ToBGR_8u_P3C3R_Ctx                 :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYUV420ToBGR_8u_P3C3R                     :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
-    nppiYUV420ToBGR_8u_P3C4R_Ctx                 :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYUV420ToBGR_8u_P3C4R                     :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
+    nppiYUV420ToBGR_8u_P3C3R_Ctx                 :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYUV420ToBGR_8u_P3C3R                     :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
+    nppiYUV420ToBGR_8u_P3C4R_Ctx                 :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYUV420ToBGR_8u_P3C4R                     :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYUV420ToBGRBatch_8u_P3C3R_Ctx            :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiYUV420ToBGRBatch_8u_P3C3R                :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYUV420ToBGRBatch_8u_P3C3R_Advanced_Ctx   :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oMaxSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
@@ -772,8 +771,8 @@ foreign lib {
     nppiYCbCr422ToRGB_8u_C2C3R                   :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYCbCr422ToRGB_8u_C2P3R_Ctx               :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiYCbCr422ToRGB_8u_C2P3R                   :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
-    nppiYCbCr422ToRGB_8u_P3C3R_Ctx               :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYCbCr422ToRGB_8u_P3C3R                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
+    nppiYCbCr422ToRGB_8u_P3C3R_Ctx               :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYCbCr422ToRGB_8u_P3C3R                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYCbCr422ToRGBBatch_8u_P3C3R_Ctx          :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiYCbCr422ToRGBBatch_8u_P3C3R              :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYCbCr422ToRGBBatch_8u_P3C3R_Advanced_Ctx :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oMaxSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
@@ -798,8 +797,8 @@ foreign lib {
     nppiYCbCr422ToBGR_8u_C2C3R                   :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYCbCr422ToBGR_8u_C2C4R_Ctx               :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nAval: Npp8u, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiYCbCr422ToBGR_8u_C2C4R                   :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nAval: Npp8u) -> NppStatus ---
-    nppiYCbCr422ToBGR_8u_P3C3R_Ctx               :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYCbCr422ToBGR_8u_P3C3R                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
+    nppiYCbCr422ToBGR_8u_P3C3R_Ctx               :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYCbCr422ToBGR_8u_P3C3R                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYCbCr422ToBGRBatch_8u_P3C3R_Ctx          :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiYCbCr422ToBGRBatch_8u_P3C3R              :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYCbCr422ToBGRBatch_8u_P3C3R_Advanced_Ctx :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oMaxSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
@@ -824,16 +823,16 @@ foreign lib {
     nppiCbYCr422ToBGR_709HDTV_8u_C2C4R           :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nAval: Npp8u) -> NppStatus ---
     nppiRGBToYCbCr420_8u_C3P3R_Ctx               :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiRGBToYCbCr420_8u_C3P3R                   :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize) -> NppStatus ---
-    nppiYCbCr420ToRGB_8u_P3C3R_Ctx               :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYCbCr420ToRGB_8u_P3C3R                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
+    nppiYCbCr420ToRGB_8u_P3C3R_Ctx               :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYCbCr420ToRGB_8u_P3C3R                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYCbCr420ToRGBBatch_8u_P3C3R_Ctx          :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiYCbCr420ToRGBBatch_8u_P3C3R              :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYCbCr420ToRGBBatch_8u_P3C3R_Advanced_Ctx :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oMaxSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiYCbCr420ToRGBBatch_8u_P3C3R_Advanced     :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oMaxSizeROI: NppiSize) -> NppStatus ---
     nppiRGBToYCrCb420_8u_AC4P3R_Ctx              :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiRGBToYCrCb420_8u_AC4P3R                  :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize) -> NppStatus ---
-    nppiYCrCb420ToRGB_8u_P3C4R_Ctx               :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nAval: Npp8u, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYCrCb420ToRGB_8u_P3C4R                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nAval: Npp8u) -> NppStatus ---
+    nppiYCrCb420ToRGB_8u_P3C4R_Ctx               :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nAval: Npp8u, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYCrCb420ToRGB_8u_P3C4R                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nAval: Npp8u) -> NppStatus ---
     nppiBGRToYCbCr420_8u_C3P3R_Ctx               :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiBGRToYCbCr420_8u_C3P3R                   :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiBGRToYCbCr420_8u_AC4P3R_Ctx              :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
@@ -848,18 +847,18 @@ foreign lib {
     nppiBGRToYCrCb420_709CSC_8u_C3P3R            :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiBGRToYCrCb420_709CSC_8u_AC4P3R_Ctx       :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiBGRToYCrCb420_709CSC_8u_AC4P3R           :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize) -> NppStatus ---
-    nppiYCbCr420ToBGR_8u_P3C3R_Ctx               :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYCbCr420ToBGR_8u_P3C3R                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
-    nppiYCbCr420ToBGR_8u_P3C4R_Ctx               :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nAval: Npp8u, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYCbCr420ToBGR_8u_P3C4R                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nAval: Npp8u) -> NppStatus ---
+    nppiYCbCr420ToBGR_8u_P3C3R_Ctx               :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYCbCr420ToBGR_8u_P3C3R                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
+    nppiYCbCr420ToBGR_8u_P3C4R_Ctx               :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nAval: Npp8u, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYCbCr420ToBGR_8u_P3C4R                   :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nAval: Npp8u) -> NppStatus ---
     nppiYCbCr420ToBGRBatch_8u_P3C3R_Ctx          :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiYCbCr420ToBGRBatch_8u_P3C3R              :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiYCbCr420ToBGRBatch_8u_P3C3R_Advanced_Ctx :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oMaxSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiYCbCr420ToBGRBatch_8u_P3C3R_Advanced     :: proc(pSrcBatchList: ^^NppiImageDescriptor, pDstBatchList: ^NppiImageDescriptor, nBatchSize: c.int, oMaxSizeROI: NppiSize) -> NppStatus ---
-    nppiYCbCr420ToBGR_709CSC_8u_P3C3R_Ctx        :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYCbCr420ToBGR_709CSC_8u_P3C3R            :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
-    nppiYCbCr420ToBGR_709HDTV_8u_P3C4R_Ctx       :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nAval: Npp8u, nppStreamCtx: NppStreamContext) -> NppStatus ---
-    nppiYCbCr420ToBGR_709HDTV_8u_P3C4R           :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nAval: Npp8u) -> NppStatus ---
+    nppiYCbCr420ToBGR_709CSC_8u_P3C3R_Ctx        :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYCbCr420ToBGR_709CSC_8u_P3C3R            :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize) -> NppStatus ---
+    nppiYCbCr420ToBGR_709HDTV_8u_P3C4R_Ctx       :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nAval: Npp8u, nppStreamCtx: NppStreamContext) -> NppStatus ---
+    nppiYCbCr420ToBGR_709HDTV_8u_P3C4R           :: proc(pSrc: ^[3]cuda.CUdeviceptr, rSrcStep: ^[3]c.int, pDst: ^Npp8u, nDstStep: c.int, oSizeROI: NppiSize, nAval: Npp8u) -> NppStatus ---
     nppiBGRToYCrCb420_8u_C3P3R_Ctx               :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
     nppiBGRToYCrCb420_8u_C3P3R                   :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize) -> NppStatus ---
     nppiBGRToYCrCb420_8u_AC4P3R_Ctx              :: proc(pSrc: cuda.CUdeviceptr, nSrcStep: c.int, pDst: ^[3]cuda.CUdeviceptr, rDstStep: ^c.int, oSizeROI: NppiSize, nppStreamCtx: NppStreamContext) -> NppStatus ---
